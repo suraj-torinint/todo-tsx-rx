@@ -1,24 +1,20 @@
-import AllTodo from "./Components/AllTodo";
-import NewTodo from "./Components/NewTodo";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import { BrowserRouter } from "react-router-dom";
+import Header from "./Pages/Header";
+import DetailTodo from "./Pages/DetailTodo";
 
 const App = () => {
     return (
         <>
-
-            <div className="alert alert-primary text-center" role="alert">
-                <span className="display-3 fw-bold me-3">Todo App</span>
-                <span className=""> in Typescript using Redux</span>
-            </div>
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm-4">
-                        <NewTodo />
-                    </div>
-                    <div className="col">
-                        <AllTodo/>
-                    </div>
-                </div>
-            </div>
+            <BrowserRouter>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Navigate to={"/todos"} />} />
+                    <Route path="/todos" element={<Home />} />
+                    <Route path="/todos/:id" element={<DetailTodo />} />
+                </Routes>
+            </BrowserRouter>
         </>
     );
 };

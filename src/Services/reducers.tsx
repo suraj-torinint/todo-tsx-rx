@@ -1,6 +1,6 @@
 export interface actionType {
     type: string;
-    payload: any;
+    payload?: any;
 }
 
 export interface stateType {
@@ -9,20 +9,18 @@ export interface stateType {
     body: string;
 }
 
-const initialState = [{
-    id: 1,
-    title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-    body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-}];
+const initialState: stateType[] = [];
 
-const todoReducers = (state:stateType[] = initialState, action: actionType) => {
+const todoReducers = (state: stateType[] = initialState, action: actionType) => {
     switch (action.type) {
-        case "getTodo":
-            return state
+        case "setTodo":
+            return [...action.payload];
+        case "getATodo":
+            return [...action.payload];
         case "addTodo":
-            return [state, ...action.payload]
+            return [...state, ...action.payload];
         default:
-            return state
+            return state;
     }
 };
 

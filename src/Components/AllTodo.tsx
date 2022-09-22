@@ -1,25 +1,43 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { stateType } from "../Services/reducers";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import TodoData from "../Data/Axios";
+import { actionType, stateType } from "../Services/reducers";
 
 const AllTodo = () => {
-    let todos = useSelector((state: stateType[]) => state);
+    const todos = useSelector((state: stateType[]) => state);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        TodoData.getTodos().then((data) => dispatch<actionType>({ type: "setTodo", payload: data }));
+    }, [dispatch]);
 
     return (
         <>
-            <div className="card">
-                {todos.map((todo, index) => (
-                    <div key={index} className="row mx-2 my-3">
-                        <div className="col-sm-2">
-                            <div className="h5">Title : </div>
-                            <div className="h5">Body : </div>
+            <div className="col">
+                <div className="card mb-3">
+                    {todos.map((todo, index) => (
+                        <div key={index} className="row mx-2 my-3 align-items-center">
+                            <div className="col-sm-10">
+                                <div className="h5 text-muted">
+                                    Title :{" "}
+                                    <Link to={`/todos/${todo.id}`} className="h5 text-dark text-decoration-none">
+                                        {todo.title}
+                                    </Link>
+                                </div>
+                                <div className="h5 text-muted">
+                                    Body :{" "}
+                                    <Link to={`/todos/${todo.id}`} className="h5 text-dark text-decoration-none">
+                                        {todo.body}
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="col text-center align-middle">
+                                <button className="btn btn-danger align-middle">Delete</button>
+                            </div>
                         </div>
-                        <div className="col">
-                            <div className="h5">{todo.title}</div>
-                            <div className="h5">{todo.body}</div>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </>
     );
