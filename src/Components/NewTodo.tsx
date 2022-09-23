@@ -1,6 +1,7 @@
-import React, { ChangeEvent, useReducer } from "react";
+import React, { useReducer } from "react";
 import { useDispatch } from "react-redux";
 import TodoData, { todoDatatype } from "../Data/Axios";
+import { todoAction } from "../Services/reducers";
 
 interface initActionType {
     type: string;
@@ -39,12 +40,12 @@ const NewTodo = () => {
     const [state, redispatch] = useReducer(reducer, initialState);
     const dispatch = useDispatch();
 
-    const handleTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
         redispatch({ type: "title", payload: event.target.value });
         redispatch({ type: "titleT", payload: true });
     };
 
-    const handleBody = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const handleBody = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         redispatch({ type: "body", payload: event.target.value });
         redispatch({ type: "bodyT", payload: true });
     };
@@ -69,7 +70,7 @@ const NewTodo = () => {
         };
         console.log(newData);
         // debugger
-        TodoData.createTodo(newData).then(() => dispatch({ type: "addTodo", payload: [newData] }));
+        TodoData.createTodo(newData).then(() => dispatch(todoAction.addTodo([newData])));
         redispatch({ type: "title", payload: "" });
         redispatch({ type: "body", payload: "" });
         redispatch({ type: "titleT", payload: false });

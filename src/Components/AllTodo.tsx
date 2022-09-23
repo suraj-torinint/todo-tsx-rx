@@ -2,14 +2,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TodoData from "../Data/Axios";
-import { actionType, stateType } from "../Services/reducers";
+import { todoAction } from "../Services/reducers";
+import { todoState } from "../Services/store";
 
 const AllTodo = () => {
-    const todos = useSelector((state: stateType[]) => state);
+    const todos = useSelector(todoState);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        TodoData.getTodos().then((data) => dispatch<actionType>({ type: "setTodo", payload: data }));
+        TodoData.getTodos().then((data) => dispatch(todoAction.setTodo(data)));
     }, [dispatch]);
 
     return (

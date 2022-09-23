@@ -104,6 +104,11 @@
       "title": "implemented post request in todos",
       "body": "implemented post request in todos, useReducer, redux, instant form validation, much more...",
       "id": 21
+    },
+    {
+      "title": "implemented redux toolkit",
+      "body": "very easy &  less confusing way to define the action-types. Also very easy to use...",
+      "id": 22
     }
   ]
 }

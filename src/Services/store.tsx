@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoReducers from "./reducers";
+import todoSlice from "./reducers";
 
 const store = configureStore({
-    // reducer: {
-    //     todos: todoReducers,
-    // },
-    reducer: todoReducers,
+    reducer: { todoReducer: todoSlice.reducer }, // now we can use multiple reducers in single store by adding an object
 });
 
+export type RootState = ReturnType<typeof store.getState>;
+
+export const todoState = (state: RootState) => {
+    return state.todoReducer
+};  // this is then passed as argument in every "useSelector(todoState)"
+
 export default store;
-// export type todoType = ReturnType<typeof todoReducers>;
+// export type todoType = ReturnType<typeof todoSlice>;
