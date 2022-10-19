@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
-import { useDispatch } from "react-redux";
 import TodoData, { todoDatatype } from "../Data/Axios";
+import { useAppDispatch } from "../Services/custom-hooks";
 import { todoAction } from "../Services/reducers";
 
 interface initActionType {
@@ -38,7 +38,7 @@ const reducer = (state: initstateType, action: initActionType) => {
 
 const NewTodo = () => {
     const [state, redispatch] = useReducer(reducer, initialState);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
         redispatch({ type: "title", payload: event.target.value });
@@ -89,7 +89,7 @@ const NewTodo = () => {
     return (
         <>
             <div className="col-sm-4">
-                <div className="fs-1 mb-4">
+                <div className="fs-3 mb-4">
                     <span className="text-secondary">Enter the Things you wish </span>
                     <span className="text-success fw-bold">ToDo</span>
                 </div>

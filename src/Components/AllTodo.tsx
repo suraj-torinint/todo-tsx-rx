@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TodoData from "../Data/Axios";
+import { useAppDispatch, useAppSelector } from "../Services/custom-hooks";
 import { todoAction } from "../Services/reducers";
 import { todoState } from "../Services/store";
 
 const AllTodo = () => {
-    const todos = useSelector(todoState);
-    const dispatch = useDispatch();
+    const todos = useAppSelector(todoState);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         TodoData.getTodos().then((data) => dispatch(todoAction.setTodo(data)));
