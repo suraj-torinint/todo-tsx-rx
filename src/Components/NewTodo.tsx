@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
-import TodoData, { todoDatatype } from "../Data/Axios";
+import { todoDatatype } from "../Data/Axios";
 import { useAppDispatch } from "../Services/custom-hooks";
-import { todoAction } from "../Services/reducers";
+import { AddTodo } from "../Services/todo-actions";
 
 interface initActionType {
     type: string;
@@ -70,7 +70,8 @@ const NewTodo = () => {
         };
         console.log(newData);
         // debugger
-        TodoData.createTodo(newData).then(() => dispatch(todoAction.addTodo([newData])));
+        // TodoData.createTodo(newData).then(() => dispatch(todoAction.addTodo([newData])));
+        dispatch(AddTodo(newData));
         redispatch({ type: "title", payload: "" });
         redispatch({ type: "body", payload: "" });
         redispatch({ type: "titleT", payload: false });

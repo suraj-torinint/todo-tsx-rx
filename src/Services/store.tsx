@@ -8,8 +8,8 @@ const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 
 export const todoState = (state: RootState) => {
-    return state.todoReducer
-};  // this is then passed as argument in every "useSelector(todoState)"
+    return state.todoReducer;
+}; // this is then passed as argument in every "useSelector(todoState)"
 
 export default store;
-// export type todoType = ReturnType<typeof todoSlice>;
+export type AppDispatch = typeof store.dispatch;

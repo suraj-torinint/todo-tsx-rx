@@ -25,7 +25,7 @@ const TodoData = {
     getATodo: (id: number): Promise<todoDatatype> => requests.get(`todos/${id}`),
     createTodo: (post: todoDatatype): Promise<todoDatatype> => requests.post("todos", post),
     // updatePost: (post: todoDatatype, id: number): Promise<todoDatatype> => requests.put(`product/${id}`, post),
-    // deletePost: (id: number): Promise<void> => requests.delete(`product/${id}`),
+    deletePost: (id: number): Promise<void> => requests.delete(`todos/${id}`),
 };
 
 export default TodoData;
